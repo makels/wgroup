@@ -10,6 +10,22 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+
+    /**
+     * Administrator - management users, posts, messages... etc.
+     */
+    const ADMIN = 1;
+
+    /**
+     * Moderator - management posts, messages
+     */
+    const MODERATOR = 2;
+
+    /**
+     * Member - create posts, send messages
+     */
+    const MEMBER = 0;
+
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -21,6 +37,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -41,4 +58,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ADMIN;
+    }
+
+    public function isModerator(): bool
+    {
+        return $this->role === self::MODERATOR;
+    }
 }

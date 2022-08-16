@@ -1,13 +1,10 @@
 <?php
+namespace App\Http\Controllers\Admin;
 
-namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+class MainController extends Controller {
 
-class HomeController extends Controller
-{
     /**
      * Create a new controller instance.
      *
@@ -19,12 +16,13 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show admin panel.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('home');
+        return view('admin/admin');
     }
+
 }
