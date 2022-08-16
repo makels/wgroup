@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'full_name' => 'WGroup Blog',
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

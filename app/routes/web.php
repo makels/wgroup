@@ -10,3 +10,4 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('po
 
 // Admin Panel
 Route::get('/admin', [App\Http\Controllers\Admin\MainController::class, 'index'])->name('admin');
+Route::get('/user/{id}', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('user');
