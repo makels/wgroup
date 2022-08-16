@@ -1,0 +1,7 @@
+/.idea
+/app/vendor
+/app/node_modules
+/app/public/storage
+/app/storage
+/base
+/app/.env
