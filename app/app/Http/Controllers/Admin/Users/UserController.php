@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 class UserController extends Controller {
 
@@ -22,7 +23,10 @@ class UserController extends Controller {
      */
     public function index(int $user_id)
     {
-        return view('admin/admin');
+        $user = User::where('id', $user_id)->first();
+        $data["title"] = __('User: ') . $user->name;
+        $data["user"] = $user;
+        return view('admin/user', $data);
     }
 
 }

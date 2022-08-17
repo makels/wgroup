@@ -15,6 +15,7 @@ Route::get('/admin/main', [App\Http\Controllers\Admin\MainController::class, 'in
 Route::get('/admin/users', [App\Http\Controllers\Admin\Users\UsersController::class, 'index'])->name('users');
 Route::get('/admin/user/{user_id}', [App\Http\Controllers\Admin\Users\UserController::class, 'index'])->name('user');
 Route::get('/admin/user/create', [App\Http\Controllers\Admin\Users\UserController::class, 'create'])->name('create_user');
+Route::post('/admin/user/save', [App\Http\Controllers\Admin\Users\UserController::class, 'save'])->name('save_user');
 
 // Posts
 Route::get('/admin/posts', [App\Http\Controllers\Admin\Posts\PostsController::class, 'index'])->name('posts');
