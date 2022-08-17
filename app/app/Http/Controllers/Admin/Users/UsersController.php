@@ -2,6 +2,9 @@
 namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Yajra\DataTables\Facades\DataTables;
+use Yajra\DataTables\Services\DataTable;
 
 class UsersController extends Controller {
 
@@ -23,6 +26,7 @@ class UsersController extends Controller {
     public function index()
     {
         $data["title"] = __("Users");
+        $data["users"] = User::all()->sortBy("id");
         return view('admin/users', $data);
     }
 

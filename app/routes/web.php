@@ -9,7 +9,7 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('blog');
 
 // Admin Panel
-Route::get('/admin', [App\Http\Controllers\Admin\MainController::class, 'index'])->name('admin');
+Route::get('/admin/main', [App\Http\Controllers\Admin\MainController::class, 'index'])->name('admin');
 
 // Users
 Route::get('/admin/users', [App\Http\Controllers\Admin\Users\UsersController::class, 'index'])->name('users');
