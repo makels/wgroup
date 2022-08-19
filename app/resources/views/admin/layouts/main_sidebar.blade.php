@@ -26,6 +26,7 @@
                     </p>
                 </a>
             </li>
+            @if( auth()->user()->hasRole(auth()->user()::ADMIN))
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
@@ -49,6 +50,7 @@
                     </li>
                 </ul>
             </li>
+            @endif
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-paper-plane"></i>
@@ -84,5 +86,5 @@
             </li>
         </ul>
     </nav>
-    <!-- /.sidebar-menu -->
+<!-- /.sidebar-menu -->
 </div>

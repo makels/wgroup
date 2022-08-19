@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\AdminAuth;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,7 +18,10 @@ class UserController extends Controller {
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $access_roles = [
+            User::ADMIN,
+        ];
+        $this->middleware('user.has_role:'.implode(":", $access_roles));
     }
 
     /**

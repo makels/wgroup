@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Admin\Posts;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\AdminAuth;
+use App\Models\User;
 
 class PostsController extends Controller {
 
@@ -12,7 +14,11 @@ class PostsController extends Controller {
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $access_roles = [
+            User::ADMIN,
+            User::MODERATOR
+        ];
+        $this->middleware('user.has_role:'.implode(":", $access_roles));
     }
 
     /**
@@ -20,9 +26,10 @@ class PostsController extends Controller {
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(int $post_id)
+    public function index()
     {
-        return view('admin/admin');
+        $data["title"] = __("Dashboard");
+        return view('admin/admin', $data);
     }
 
 }

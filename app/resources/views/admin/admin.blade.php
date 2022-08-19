@@ -42,6 +42,7 @@
                     </div>
                 </div>
                 <!-- ./col -->
+                @if( auth()->user()->hasRole(auth()->user()::ADMIN))
                 <div class="col-lg-4 col-6">
                     <!-- small box -->
                     <div class="small-box bg-warning">
@@ -56,6 +57,7 @@
                         <a href="{{ route("users") }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+                @endif
                 <!-- ./col -->
             </div>
             <!-- /.row -->

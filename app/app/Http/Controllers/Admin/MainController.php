@@ -2,6 +2,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\AdminAuth;
+use App\Models\User;
 
 class MainController extends Controller {
 
@@ -12,7 +14,11 @@ class MainController extends Controller {
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $access_roles = [
+            User::ADMIN,
+            User::MODERATOR,
+        ];
+        $this->middleware('user.has_role:'.implode(":", $access_roles));
     }
 
     /**

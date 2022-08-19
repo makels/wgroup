@@ -63,13 +63,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function isAdmin(): bool
-    {
-        return $this->role === self::ADMIN;
-    }
-
-    public function isModerator(): bool
-    {
-        return $this->role === self::MODERATOR;
+    public function hasRole($role) {
+        return $this->role == $role;
     }
 }

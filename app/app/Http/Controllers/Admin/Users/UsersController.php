@@ -1,27 +1,28 @@
 <?php
 namespace App\Http\Controllers\Admin\Users;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use Yajra\DataTables\Facades\DataTables;
-use Yajra\DataTables\Services\DataTable;
+use App\Http\Controllers\Controller;
 
 class UsersController extends Controller {
 
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @return mixed
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $access_roles = [
+            User::ADMIN,
+        ];
+        $this->middleware('user.has_role:'.implode(":", $access_roles));
     }
 
     /**
      * Show admin panel.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return mixed
      */
     public function index()
     {
