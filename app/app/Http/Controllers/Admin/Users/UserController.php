@@ -38,7 +38,32 @@ class UserController extends Controller {
     }
 
     public function save(Request $request) {
+        $rules = [
+            'user_data.name' => 'required|max:255',
+            'user_data.role' => 'required',
+            'user_data.sex' => 'required',
+            'user_data.birthday' => 'required',
+            'user_data.email' => 'required|email'
+        ];
+        if(empty($user_data["id"])) $rules['user_data.password'] = 'required|min:6';
+
+        $request->validate($rules);
+
         $user_data = $request->post("user_data", null);
+        if(empty($user_data["id"])) {
+            $user = new User([
+                "name" => $user_data["name"],
+                "email" => $user_data["email"],
+                "password" => Hash::make($user_data["password"]),
+                "role" => $user_data["role"],
+                "birthday" => date("Y-m-d", strtotime($user_data["birthday"])),
+                "sex" => $user_data["sex"],
+                "country" => $user_data["country"],
+                "city" => $user_data["city"],
+            ]);
+            $user->save();
+            return redirect(route('users'));
+        }
         if(!is_null($user_data)) {
             if(!empty('birthday')) {
                 $user_data['birthday'] = date('Y-m-d', strtotime($user_data['birthday']));
@@ -53,6 +78,12 @@ class UserController extends Controller {
             $user->update($user_data);
         }
         return redirect(route('users'));
+    }
+
+    public function create() {
+        $data["title"] = __("Create User");
+        $data["user"] = new User();
+        return view('admin/user', $data);
     }
 
 }

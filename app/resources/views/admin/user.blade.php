@@ -15,25 +15,33 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">{{ $user->name }}</h3>
+                            <h3 class="card-title">@if(!empty($user->name)){{ $user->name }}@else {{ __("New User") }} @endif</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form method="post" action="{{ route('save_user') }}">
+                        <form id="user_form" method="post" action="{{ route('save_user') }}">
                             @csrf
 
                             <input type="hidden" name="user_data[id]" value="{{ $user->id }}">
 
                             <div class="card-body">
-
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <div class="form-group">
-                                    <label for="inputName">{{ __('Name') }}</label>
-                                    <input type="text" class="form-control" name="user_data[name]" value="{{ $user->name }}" id="inputName" placeholder="{{ __('Enter name') }}">
+                                    <label for="inputName">{{ __('Name') }}<span class="required-label">*</span></label>
+                                    <input type="text" class="form-control required" name="user_data[name]" value="{{ $user->name }}" id="inputName" placeholder="{{ __('Enter name') }}">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="selectSex">{{ __('Role') }}</label>
-                                    <select class="form-control" id="selectSex" name="user_data[role]">
+                                    <label for="selectSex">{{ __('Role') }}<span class="required-label">*</span></label>
+                                    <select class="form-control  required" id="selectSex" name="user_data[role]">
                                         <option value="0" @if($user->role == 0) selected @endif>{{ __('Member') }}</option>
                                         <option value="1" @if($user->role == 1) selected @endif>{{ __('Administrator') }}</option>
                                         <option value="2" @if($user->role == 2) selected @endif>{{ __('Moderator') }}</option>
@@ -41,7 +49,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="selectSex">{{ __('Sex') }}</label>
+                                    <label for="selectSex">{{ __('Sex') }}<span class="required-label">*</span></label>
                                     <select class="form-control" id="selectSex" name="user_data[sex]">
                                         <option value="0" @if($user->sex == 0) selected @endif>{{ __('Nevermind') }}</option>
                                         <option value="1" @if($user->sex == 1) selected @endif>{{ __('Male') }}</option>
@@ -50,8 +58,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>{{ __('Birthday') }}:</label>
-                                    <div class="input-group date" id="birthday" data-target-input="nearest">
+                                    <label>{{ __('Birthday') }}<span class="required-label">*</span></label>
+                                    <div class="input-group date required" id="birthday" data-target-input="nearest">
                                         <input type="text" value="{{ date('d.m.Y', strtotime($user->birthday)) }}" name="user_data[birthday]" class="form-control datetimepicker-input" data-target="#birthday"/>
                                         <div id="birthday-calendar" class="input-group-append" data-target="#birthday" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
@@ -70,12 +78,12 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="inputEmail">{{ __('Email address') }}</label>
-                                    <input type="email" class="form-control" name="email" value="{{ $user->email }}" id="inputEmail" placeholder="{{ __('Enter email') }}">
+                                    <label for="inputEmail">{{ __('Email address') }}<span class="required-label">*</span></label>
+                                    <input type="email" class="form-control required" name="user_data[email]" value="{{ $user->email }}" id="inputEmail" placeholder="{{ __('Enter email') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword">{{ __('Password') }}</label>
-                                    <input type="password" class="form-control" name="user_data[password]" id="inputPassword" placeholder="{{ __('Password') }}">
+                                    <label for="inputPassword">{{ __('Password') }}@if( empty($user->id) )<span class="required-label">*</span>@endif</label>
+                                    <input type="password" class="form-control @if( empty($user->id) ) required @endif" name="user_data[password]" id="inputPassword" placeholder="{{ __('Password') }}">
                                 </div>
 
                             </div>
