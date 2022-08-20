@@ -28,8 +28,8 @@ class PostsController extends Controller {
      */
     public function index()
     {
-        $data["title"] = __("Dashboard");
-        return view('admin/admin', $data);
+        $data["title"] = __("Posts");
+        return view('admin/posts', $data);
     }
 
 }

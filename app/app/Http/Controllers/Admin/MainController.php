@@ -29,6 +29,7 @@ class MainController extends Controller {
     public function index()
     {
         $data["title"] = __("Dashboard");
+        $data["user_count"] = User::query()->count();
         return view('admin/admin', $data);
     }
 
