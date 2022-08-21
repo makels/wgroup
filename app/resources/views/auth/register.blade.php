@@ -40,11 +40,10 @@
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Sex') }}<span class="required-label">*</span></label>
                             <div class="col-md-6">
-                                <select class="form-control">
+                                <select name="sex" class="form-control">
                                     <option value="0">Nevermind</option>
                                     <option value="1">Male</option>
                                     <option value="2">Female</option>
-
                                 </select>
                                 @error('sex')
                                 <span class="invalid-feedback" role="alert">
@@ -72,7 +71,7 @@
                             <label for="country" class="col-md-4 col-form-label text-md-end">{{ __('Country') }}</label>
 
                             <div class="col-md-6">
-                                <input id="country" type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="{{ old('country') }}" required autocomplete="country" autofocus>
+                                <input id="country" type="text" class="form-control @error('country') is-invalid @enderror" name="country" value="{{ old('country') }}"  autocomplete="country" autofocus>
 
                                 @error('country')
                                 <span class="invalid-feedback" role="alert">
@@ -86,7 +85,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('City') }}</label>
 
                             <div class="col-md-6">
-                                <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" autofocus>
+                                <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" autocomplete="city" autofocus>
 
                                 @error('city')
                                 <span class="invalid-feedback" role="alert">

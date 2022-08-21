@@ -45,7 +45,7 @@ class UserController extends Controller {
             'user_data.email'   => 'required|email'
         ];
 
-        if(empty($user_data["id"])) $rules['user_data.password'] = 'required|min:6';
+        if(empty($user_data["id"])) $rules['user_data.password'] = ['required', 'string', 'min:8'];
         $request->validate($rules);
 
         if(empty($user_data["id"])) {

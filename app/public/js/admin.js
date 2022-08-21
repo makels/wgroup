@@ -32,9 +32,25 @@ let WGroupAdmin = function() {
 
     this.formsValidate = function(inputEl) {
         if($(inputEl).hasClass('required')) {
-            if($(inputEl).val() === '') $(inputEl).addClass('is-invalid');
-            else $(inputEl).removeClass('is-invalid');
+            if($(inputEl).val() === '') {
+                $(inputEl).addClass('is-invalid');
+                return false;
+            } else {
+                $(inputEl).removeClass('is-invalid');
+            }
         }
+        return true;
+    }
+
+    this.formValidate = function(form) {
+        var _this = this;
+        var errors = false;
+        $(form).find('input').each(function(index, el) {
+            if(_this.formsValidate(el) === false) {
+                errors = true;
+            }
+        });
+        return !errors;
     }
 
     this.postEditorInit = function() {

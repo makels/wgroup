@@ -19,7 +19,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form id="user_form" method="post" action="{{ route('save_user') }}">
+                        <form id="user_form" method="post" action="{{ route('save_user') }}" onsubmit="return adminWGroup.formValidate(this);">
                             @csrf
 
                             <input type="hidden" name="user_data[id]" value="{{ $user->id }}">
@@ -40,9 +40,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="selectSex">{{ __('Role') }}<span class="required-label">*</span></label>
-                                    <select class="form-control  required" id="selectSex" name="user_data[role]">
-                                        <option value="0" @if($user->role == 0) selected @endif>{{ __('Member') }}</option>
+                                    <label for="selectRole">{{ __('Role') }}<span class="required-label">*</span></label>
+                                    <select class="form-control  required" id="selectRole" name="user_data[role]">
+                                        <option value="0" @if($user->role == 0) selected @endif>{{ __('Writer') }}</option>
                                         <option value="1" @if($user->role == 1) selected @endif>{{ __('Administrator') }}</option>
                                         <option value="2" @if($user->role == 2) selected @endif>{{ __('Moderator') }}</option>
                                     </select>
@@ -60,7 +60,7 @@
                                 <div class="form-group">
                                     <label>{{ __('Birthday') }}<span class="required-label">*</span></label>
                                     <div class="input-group date required" id="birthday" data-target-input="nearest">
-                                        <input type="text" value="{{ date('d.m.Y', strtotime($user->birthday)) }}" name="user_data[birthday]" class="form-control datetimepicker-input" data-target="#birthday"/>
+                                        <input type="text" value="@if(!empty($user->birthday)){{ date('d.m.Y', strtotime($user->birthday)) }}@endif" name="user_data[birthday]" class="form-control datetimepicker-input required" data-target="#birthday"/>
                                         <div id="birthday-calendar" class="input-group-append" data-target="#birthday" data-toggle="datetimepicker">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
