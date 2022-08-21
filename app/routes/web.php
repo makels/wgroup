@@ -35,6 +35,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin\Posts', 'prefix' => 'ad
     Route::get( 'post/edit/{post_id}',  [PostController::class, 'index'])->name('post');
     Route::post('post/save',            [PostController::class, 'save'])->name('save_post');
     Route::post('post/upload',          [PostController::class, 'fileUploadPost'])->name('post_image_upload');
-    Route::get( 'post/block/{post_id}', [PostController::class, 'block'])->name('post_block');
+    Route::post('post/block',           [PostController::class, 'block'])->name('post_block');
     Route::get( 'post/unblock/{post_id}', [PostController::class, 'unblock'])->name('post_unblock');
 });

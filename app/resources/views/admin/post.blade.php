@@ -54,16 +54,30 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="button" class="btn btn-default" onclick="document.location.href='{{ route('posts') }}';">{{ __('Back') }}</button>
-                                <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-
-                                @if($post->id > 0 && auth()->user()->inRoles([App\Models\User::ADMIN, App\Models\User::MODERATOR]) === true)
-                                    @if($post->block == 0)
-                                        <button type="button" onclick="window.location.href='{{ route('post_block', $post->id) }}'" class="btn btn-danger">{{ __('Block this post') }}</button>
-                                    @else
-                                        <button type="button" onclick="window.location.href='{{ route('post_unblock', $post->id) }}'" class="btn btn-info">{{ __('Unblock this post') }}</button>
-                                    @endif
-                                @endif
+                                <div class="row">
+                                    <div class="col-1">
+                                        <button type="button" style="width: 100%;" class="btn btn-default" onclick="document.location.href='{{ route('posts') }}';">{{ __('Back') }}</button>
+                                    </div>
+                                    <div class="col-1">
+                                        <button type="submit" style="width: 100%;" class="btn btn-primary">{{ __('Save') }}</button>
+                                    </div>
+                                    <div class="col-10">
+                                        @if($post->id > 0 && auth()->user()->inRoles([App\Models\User::ADMIN, App\Models\User::MODERATOR]) === true)
+                                            @if($post->block == 0)
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <button type="button"
+                                                                onclick="adminWGroup.postBlock({{ $post->id }})"
+                                                                class="btn btn-danger">{{ __('Block this post') }}</button>
+                                                    </div>
+                                                    <input id="reason-post-blocking" placeholder="{{ __("Enter reason for blocking post") }}" type="text" class="form-control">
+                                                </div>
+                                            @else
+                                                <button type="button" onclick="window.location.href='{{ route('post_unblock', $post->id) }}'" class="btn btn-info">{{ __('Unblock this post') }}</button>
+                                            @endif
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>

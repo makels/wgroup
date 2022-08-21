@@ -88,16 +88,20 @@ class PostController extends Controller {
     }
 
     /**  Blocking post by moderator */
-    public function block($post_id) {
+    public function block(Request $request) {
+        $post_id = $request->post('post_id');
+        $reason = $request->post('reason');
         $post = Post::query()->where('id', $post_id);
-        $post->update(['block' => 1]);
-        return redirect(route('posts'));
+        $post->update(['block' => 1, 'block_reason' => $reason]);
+        return response()->json([
+            "message" => "done"
+        ]);
     }
 
     /**  Unblocking post by moderator */
     public function unblock($post_id) {
         $post = Post::query()->where('id', $post_id);
-        $post->update(['block' => 0]);
+        $post->update(['block' => 0, 'block_reason' => '']);
         return redirect(route('posts'));
     }
 

@@ -42,6 +42,7 @@ class Post extends Model
         'status',
         'body',
         'block',
+        'block_reason'
     ];
 
     /**

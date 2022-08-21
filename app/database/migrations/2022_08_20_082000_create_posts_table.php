@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->enum('status', ['PUBLISHED', 'TO_MODERATE', 'DRAFT', 'TRASH'])->default('DRAFT');
             $table->text('body');
             $table->integer('block')->default(0);
+            $table->string('block_reason', 255);
             $table->timestamps();
             $table->foreign('author_id')
                 ->references('id')

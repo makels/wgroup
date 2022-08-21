@@ -157,6 +157,26 @@ let WGroupAdmin = function() {
         });
     }
 
+    this.postBlock = function(post_id) {
+        var reason = $('#reason-post-blocking').val();
+        var token = $('input[name=_token]').val();
+        $.ajax({
+            url: '/admin/post/block',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                '_token': token,
+                'post_id': post_id,
+                'reason': reason
+            },
+            success: function(res) {
+                if(res.message === 'done') {
+                    window.location.href = '/admin/posts';
+                }
+            }
+        });
+    }
+
 }
 
 let adminWGroup = new WGroupAdmin();

@@ -61,7 +61,7 @@
                                                     {{ $row->title }}
                                                 @endif
                                             @else
-                                            <a href="{{route('post', $row->id)}}" @if($row->block == 1) title="{{ __('This post has  been blocked') }}" style="color: red;" @endif>
+                                            <a href="{{route('post', $row->id)}}" @if($row->block == 1) title="@if(!empty($row->block_reason)){{ $row->block_reason }} @else {{ __('This post has  been blocked') }} @endif" style="color: red;" @endif>
                                                 @if(strlen($row->title) > 70)
                                                     {{ substr($row->title, 0, 70) }}...
                                                 @else
