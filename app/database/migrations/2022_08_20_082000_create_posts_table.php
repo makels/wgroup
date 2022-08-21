@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('author_id');
             $table->string('title', 255);
             $table->string('image', 255)->nullable();
-            $table->enum('status', ['PUBLISHED', 'DRAFT'])->default('DRAFT');
+            $table->enum('status', ['PUBLISHED', 'TO_MODERATE', 'DRAFT'])->default('DRAFT');
             $table->text('body');
             $table->timestamps();
             $table->foreign('author_id')

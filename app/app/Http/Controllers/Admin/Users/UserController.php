@@ -1,12 +1,9 @@
 <?php
 namespace App\Http\Controllers\Admin\Users;
 
-use App\Http\Controllers\Controller;
-use App\Http\Middleware\AdminAuth;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller {
@@ -38,18 +35,19 @@ class UserController extends Controller {
     }
 
     public function save(Request $request) {
-        $rules = [
-            'user_data.name' => 'required|max:255',
-            'user_data.role' => 'required',
-            'user_data.sex' => 'required',
-            'user_data.birthday' => 'required',
-            'user_data.email' => 'required|email'
-        ];
-        if(empty($user_data["id"])) $rules['user_data.password'] = 'required|min:6';
+        $user_data = $request->post("user_data", null);
 
+        $rules = [
+            'user_data.name'    => 'required|max:255',
+            'user_data.role'    => 'required',
+            'user_data.sex'     => 'required',
+            'user_data.birthday'=> 'required',
+            'user_data.email'   => 'required|email'
+        ];
+
+        if(empty($user_data["id"])) $rules['user_data.password'] = 'required|min:6';
         $request->validate($rules);
 
-        $user_data = $request->post("user_data", null);
         if(empty($user_data["id"])) {
             $user = new User([
                 "name" => $user_data["name"],

@@ -16,14 +16,14 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>150</h3>
+                            <h3>{{ $posts_to_moderate_count }}</h3>
 
-                            <p>To moderate</p>
+                            <p>{{ __("To moderate") }}</p>
                         </div>
                         <div class="icon">
                             <i class="far fa-paper-plane"></i>
                         </div>
-                        <a href="{{ route("posts") }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route("posts") }}" class="small-box-footer">{{ __("More info") }} <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -31,14 +31,14 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>4500</h3>
+                            <h3>{{ $posts_count }}</h3>
 
-                            <p>All posts</p>
+                            <p>{{ __("All posts") }}</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route("posts") }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route("posts") }}" class="small-box-footer">{{ __("More info") }} <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -49,12 +49,12 @@
                         <div class="inner">
                             <h3>{{ $user_count }}</h3>
 
-                            <p>User Registrations</p>
+                            <p>{{ __("User Registrations") }}</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="{{ route("users") }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route("users") }}" class="small-box-footer">{{ __("More info") }} <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 @endif

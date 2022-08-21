@@ -59,7 +59,8 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     @if( auth()->user()->hasRole(auth()->user()::ADMIN) ||
-                                         auth()->user()->hasRole(auth()->user()::MODERATOR))
+                                         auth()->user()->hasRole(auth()->user()::MODERATOR) ||
+                                         auth()->user()->hasRole(auth()->user()::WRITER))
                                         <a class="dropdown-item" href="{{ route('admin') }}">
                                             {{ __('Admin Panel') }}
                                         </a>

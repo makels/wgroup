@@ -2,6 +2,19 @@
     width: 100%;
 }
 
+#postInputFile,
+#post-upload-image {
+    cursor: pointer;
+}
+
+
+
+.post-image-preview img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
 .required-label {
     color: red;
 }

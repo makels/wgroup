@@ -19,57 +19,61 @@
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="{{ route("admin") }}" class="nav-link">
+                <a href="{{ route("admin") }}" class="nav-link @if(Helper::currentRoute() == 'admin') active @endif">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
-                        Dashboard
+                       {{ __("Dashboard") }}
                     </p>
                 </a>
             </li>
             @if( auth()->user()->hasRole(auth()->user()::ADMIN))
-            <li class="nav-item">
+            <li class="nav-item @if(in_array(Helper::currentRoute(), ['users', 'user', 'create_user'])) menu-is-opening menu-open @endif">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
                     <p>
-                        Users
+                        {{ __("Users") }}
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ route("users") }}" class="nav-link">
+                        <a href="{{ route("users") }}" class="nav-link  @if(Helper::currentRoute() == 'users') active @endif">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Users List</p>
+                            <p>{{ __("Users List") }}</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route("create_user") }}" class="nav-link">
+                        <a href="{{ route("create_user") }}" class="nav-link  @if(Helper::currentRoute() == 'create_user') active @endif">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Create User</p>
+                            <p>{{ __("Create User") }}</p>
                         </a>
                     </li>
                 </ul>
             </li>
             @endif
-            <li class="nav-item">
+            <li class="nav-item @if(in_array(Helper::currentRoute(), ['posts', 'post', 'create_post'])) menu-is-opening menu-open @endif">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-paper-plane"></i>
                     <p>
-                        Posts
+                        {{ __("Posts") }}
                         <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ route("posts") }}" class="nav-link">
+                        <a href="{{ route("posts") }}" class="nav-link  @if(Helper::currentRoute() == 'posts') active @endif">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Posts List</p>
+                            @if(auth()->user()->role == auth()->user()::WRITER)
+                                <p>{{ __("My Posts") }}</p>
+                            @else
+                                <p>{{ __("Posts List") }}</p>
+                            @endif
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route("create_post") }}" class="nav-link">
+                        <a href="{{ route("create_post") }}" class="nav-link  @if(Helper::currentRoute() == 'create_post') active @endif">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Create Post</p>
+                            <p>{{ __("Create Post") }}</p>
                         </a>
                     </li>
                 </ul>
@@ -78,7 +82,7 @@
                 <a href="{{ route("logout") }}" class="nav-link" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                     <i class="far fa-arrow-alt-circle-right nav-icon"></i>
-                    <p>Logout</p>
+                    <p>{{ __("Logout") }}</p>
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf

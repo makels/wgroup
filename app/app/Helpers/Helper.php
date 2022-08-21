@@ -1,12 +1,14 @@
 <?php
 namespace App\Helpers;
 
+use Illuminate\Support\Facades\Route;
+
 class Helper {
 
     public static function getRoleName(int $role_id) {
         switch ($role_id) {
             case 0:
-                return __("Member");
+                return __("Writer");
             case 1:
                 return __("Administrator");
             case 2:
@@ -16,6 +18,8 @@ class Helper {
         }
     }
 
-
+    public static function currentRoute() {
+        return Route::currentRouteName();
+    }
 
 }

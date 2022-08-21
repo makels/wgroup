@@ -24,7 +24,7 @@ class User extends Authenticatable
     /**
      * Member - create posts, send messages
      */
-    const MEMBER = 0;
+    const WRITER = 0;
 
     use HasApiTokens, HasFactory, Notifiable;
 

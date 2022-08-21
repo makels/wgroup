@@ -34,6 +34,12 @@
 <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
+<!-- Summernote -->
+<link rel="stylesheet" href="/plugins/summernote/summernote-bs4.min.css">
+<script src="/plugins/summernote/summernote-bs4.min.js"></script>
+
+<script src="/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
 <link href="/css/admin.css" rel="stylesheet">
 <script src="/js/admin.js"></script>
 
