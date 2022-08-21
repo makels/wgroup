@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-12">
                     <!-- Default box -->
-                    <div class="card">
+                    <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">{{ __("Posts List") }}</h3>
 
@@ -27,28 +27,49 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <table style="width:100%;" class="table table-bordered" id="table">
+                            <div class="row">
+                                @include("admin.layouts.posts_filter")
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table style="width:100%;" class="table table-bordered" id="posts_table">
                                 <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Author</th>
-                                    <th>Post</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
+                                    <th>{{ __("Id") }}</th>
+                                    @if(auth()->user()->role !== App\Models\User::WRITER)
+                                        <th>{{ __("Author") }}</th>
+                                    @endif
+                                    <th>{{ __("Post Title") }}</th>
+                                    <th filter_id="post_type_filter_id">{{ __("Type") }}</th>
+                                    <th filter_id="post_status_filter_id">{{ __("Status") }}</th>
+                                    <th>{{ __("Date") }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach( $posts as $i => $row )
                                     <tr>
                                         <td>{{ $row->id }}</td>
-                                        <td>{{ $row->author_id }}</td>
-                                        <td>{{ $row->title }}</td>
-                                        <td>{{ $row->status }}</td>
-                                        <td>{{ $row->updated_at }}</td>
+                                        @if(auth()->user()->role !== App\Models\User::WRITER)
+                                            <td>{{ $row->author->name}}</td>
+                                        @endif
+                                        <td>
+                                            <a href="{{route('post', $row->id)}}" @if($row->block == 1) title="{{ __('This post has  been blocked') }}" style="color: red;" @endif>
+                                                @if(strlen($row->title) > 70)
+                                                    {{ substr($row->title, 0, 70) }}...
+                                                @else
+                                                    {{ $row->title }}
+                                                @endif
+                                            </a>
+                                        </td>
+                                        <td>{{ App\Models\Post::getPostType($row->type) }}</td>
+                                        <td>{{ App\Models\Post::getPostStatus($row->status) }}</td>
+                                        <td>{{ date('d.m.Y H:i', strtotime($row->updated_at)) }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">

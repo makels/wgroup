@@ -19,6 +19,13 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="selectType">{{ __('Type') }}<span class="required-label">*</span></label>
+            <select class="form-control" id="selectType" name="post_data[type]">
+                <option value="PUBLIC" @if(empty($post->type) || $post->type == 'PUBLIC') selected @endif>{{ __('Public') }}</option>
+                <option value="PRIVATE" @if($post->type == 'PRIVATE') selected @endif>{{ __('Private') }}</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label for="selectStatus">{{ __('Status') }}<span class="required-label">*</span></label>
             <select class="form-control" id="selectStatus" name="post_data[status]">
                 <option value="DRAFT" @if(empty($post->status) || $post->status == 'DRAFT') selected @endif>{{ __('Draft') }}</option>
@@ -26,12 +33,17 @@
                 @if(auth()->user()->role != auth()->user()::WRITER)
                     <option value="PUBLISHED" @if($post->status == 'PUBLISHED') selected @endif>{{ __('Published') }}</option>
                 @endif
+                <option value="TRASH" @if($post->status == 'TRASH') selected @endif>{{ __('Trash') }}</option>
             </select>
         </div>
         <div class="form-group">
-            <label for="postInputFile">Post main image</label>
+            <label for="postInputFile">{{ __("Post main image") }}</label>
             <div class="post-image-preview">
-                <img src="/dist/img/post_image_empty.jpg">
+                @if(!empty($post->image))
+                <img src="{{ '/upload/' . $post->image }}">
+                @else
+                    <img src="/dist/img/post_image_empty.jpg">
+                @endif
             </div>
             <div class="input-group">
                 <div class="custom-file">

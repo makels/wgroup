@@ -31,6 +31,7 @@ class PostController extends Controller {
     public function index(int $post_id)
     {
         $post = Post::where('id', $post_id)->first();
+        $data["title"] = 'Post';
         $data["post"] = $post;
         return view('admin/post', $data);
     }
@@ -44,14 +45,15 @@ class PostController extends Controller {
         ]);
 
         if(empty($post_data["id"])) {
-            $user = new Post([
+            $post = new Post([
                 "author_id" => auth()->user()->id,
                 "title"     => $post_data["title"],
                 "image"     => $post_data["image"],
                 "status"    => $post_data["status"],
                 "body"      => $post_data["body"],
+                "block"     => 0
             ]);
-            $user->save();
+            $post->save();
             return redirect(route('posts'));
         }
 
@@ -59,7 +61,7 @@ class PostController extends Controller {
             $post = Post::find($post_data["id"]);
             $post->update($post_data);
         }
-        return redirect(route('users'));
+        return redirect(route('posts'));
     }
 
     /** Show post create form */
@@ -83,6 +85,20 @@ class PostController extends Controller {
             'res' => 0,
             'file' => $fileName
         ]);
+    }
+
+    /**  Blocking post by moderator */
+    public function block($post_id) {
+        $post = Post::query()->where('id', $post_id);
+        $post->update(['block' => 1]);
+        return redirect(route('posts'));
+    }
+
+    /**  Unblocking post by moderator */
+    public function unblock($post_id) {
+        $post = Post::query()->where('id', $post_id);
+        $post->update(['block' => 0]);
+        return redirect(route('posts'));
     }
 
 }

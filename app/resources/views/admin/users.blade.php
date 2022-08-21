@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-12">
                     <!-- Default box -->
-                    <div class="card">
+                    <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">{{ __("Users List") }}</h3>
 
@@ -27,7 +27,9 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <table style="width:100%;" class="table table-bordered" id="table">
+                            <div class="row">
+                                <div class="col-12">
+                                    <table style="width:100%;" class="table table-bordered" id="table">
                                 <thead>
                                 <tr>
                                     <th>Id</th>
@@ -42,11 +44,13 @@
                                         <td>{{ $row->id }}</td>
                                         <td><a href="{{ route('user', $row->id) }}">{{ $row->name }}</a></td>
                                         <td>{{ $row->email }}</td>
-                                        <td>{{ Helper::getRoleName($row->role) }}</td>
+                                        <td>{{ App\Models\User::getRoleName($row->role) }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">

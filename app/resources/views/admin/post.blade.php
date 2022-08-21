@@ -21,7 +21,8 @@
                         <!-- form start -->
                         <form id="post_form" method="post" action="{{ route('save_post') }}">
                             @csrf
-                            <input type="hidden" id="post_data_image" name="post_data[image]" value="" />
+                            @if(!empty($post->id))<input type="hidden" name="post_data[id]" value="{{ $post->id }}">@endif
+                            <input type="hidden" id="post_data_image" name="post_data[image]" value="@if(!empty($post->image)){{ $post->image }}@endif" />
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -54,7 +55,16 @@
 
                             <div class="card-footer">
                                 <button type="button" class="btn btn-default" onclick="document.location.href='{{ route('posts') }}';">{{ __('Back') }}</button>
-                                <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+
+
+                                @if($post->id > 0 && auth()->user()->inRoles([App\Models\User::ADMIN, App\Models\User::MODERATOR]) === true)
+                                    @if($post->block == 0)
+                                        <button type="button" onclick="window.location.href='{{ route('post_block', $post->id) }}'" class="btn btn-danger">{{ __('Block this post') }}</button>
+                                    @else
+                                        <button type="button" onclick="window.location.href='{{ route('post_unblock', $post->id) }}'" class="btn btn-info">{{ __('Unblock this post') }}</button>
+                                    @endif
+                                @endif
                             </div>
                         </form>
                     </div>

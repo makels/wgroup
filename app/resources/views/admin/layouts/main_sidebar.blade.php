@@ -1,5 +1,5 @@
 <!-- Brand Logo -->
-<a href="{{ route('admin') }}" class="brand-link">
+<a href="{{ route('blog') }}" class="brand-link">
     <span class="brand-text font-weight-light">{{ config('app.full_name') }}</span>
 </a>
 
@@ -10,7 +10,8 @@
         <div class="info">
             <a href="{{ route("user", ["user_id" => auth()->user()->id]) }}" class="d-block">
                 <i class="far fa-user-circle nav-icon"></i>
-                {{ auth()->user()->name }}
+                {{ auth()->user()->name }}<br>
+                <small>({{ App\Models\User::getRoleName(auth()->user()->role) }})</small>
             </a>
         </div>
     </div>

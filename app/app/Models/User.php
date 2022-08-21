@@ -63,7 +63,28 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function hasRole($role) {
+    public function hasRole($role): bool {
         return $this->role == $role;
+    }
+
+    public function inRoles(array $roles): bool {
+        return in_array($this->role, $roles);
+    }
+
+    public function posts() {
+        return $this->hasMany(Post::class);
+    }
+
+    public static function getRoleName(int $role) {
+        switch ($role) {
+            case self::WRITER:
+                return __("Writer");
+            case self::ADMIN:
+                return __("Administrator");
+            case self::MODERATOR:
+                return __("Moderator");
+            default:
+                return __("Guest");
+        }
     }
 }
