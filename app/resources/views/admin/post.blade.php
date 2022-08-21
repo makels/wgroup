@@ -57,7 +57,6 @@
                                 <button type="button" class="btn btn-default" onclick="document.location.href='{{ route('posts') }}';">{{ __('Back') }}</button>
                                 <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
 
-
                                 @if($post->id > 0 && auth()->user()->inRoles([App\Models\User::ADMIN, App\Models\User::MODERATOR]) === true)
                                     @if($post->block == 0)
                                         <button type="button" onclick="window.location.href='{{ route('post_block', $post->id) }}'" class="btn btn-danger">{{ __('Block this post') }}</button>

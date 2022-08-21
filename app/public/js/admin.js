@@ -18,6 +18,7 @@ let WGroupAdmin = function() {
     }
 
     this.postTableInit = function() {
+        var colCount = $('#posts_table thead tr th').length;
         $('#posts_table thead tr')
             .clone(true)
             .addClass('filters')
@@ -26,9 +27,10 @@ let WGroupAdmin = function() {
         $('#posts_table').DataTable({
             orderCellsTop: true,
             fixedHeader: true,
-            order: [[4, 'desc']],
+            order: [colCount - 1, 'desc'],
             initComplete: function () {
                 var api = this.api();
+
                 api
                     .columns()
                     .eq(0)

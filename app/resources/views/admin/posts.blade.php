@@ -42,7 +42,7 @@
                                     <th>{{ __("Post Title") }}</th>
                                     <th filter_id="post_type_filter_id">{{ __("Type") }}</th>
                                     <th filter_id="post_status_filter_id">{{ __("Status") }}</th>
-                                    <th>{{ __("Date") }}</th>
+                                    <th width="100">{{ __("Date") }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -53,6 +53,14 @@
                                             <td>{{ $row->author->name}}</td>
                                         @endif
                                         <td>
+                                            @if(!auth()->user()->inRoles([App\Models\User::ADMIN, App\Models\User::MODERATOR])
+                                                && ($row->status == 'PUBLISHED' || $row->status == 'TO_MODERATE'))
+                                                @if(strlen($row->title) > 70)
+                                                    {{ substr($row->title, 0, 70) }}...
+                                                @else
+                                                    {{ $row->title }}
+                                                @endif
+                                            @else
                                             <a href="{{route('post', $row->id)}}" @if($row->block == 1) title="{{ __('This post has  been blocked') }}" style="color: red;" @endif>
                                                 @if(strlen($row->title) > 70)
                                                     {{ substr($row->title, 0, 70) }}...
@@ -60,6 +68,7 @@
                                                     {{ $row->title }}
                                                 @endif
                                             </a>
+                                            @endif
                                         </td>
                                         <td>{{ App\Models\Post::getPostType($row->type) }}</td>
                                         <td>{{ App\Models\Post::getPostStatus($row->status) }}</td>

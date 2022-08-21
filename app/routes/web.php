@@ -15,6 +15,7 @@ Auth::routes();
 
 // Blog
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('blog');
+Route::get('/post/{post_id}', [App\Http\Controllers\PostController::class, 'index'])->name('front_post');
 
 // Admin Panel
 Route::get('/admin/main', [App\Http\Controllers\Admin\MainController::class, 'index'])->name('admin');

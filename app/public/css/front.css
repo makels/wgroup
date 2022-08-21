@@ -8,3 +8,50 @@
 .required-label {
     color: red;
 }
+
+.posts-list a {
+    text-decoration: none;
+}
+
+.post-short {
+    margin-bottom: 20px;
+    border-bottom: 1px dotted #aaa;
+    padding: 20px 0;
+    cursor: pointer;
+}
+
+.post-short h5 {
+    font-weight: bold;
+    color: #0c5460;
+}
+
+.post-single h3 {
+    font-weight: bold;
+    color: #0c5460;
+}
+
+.post-short-info {
+    color: #555;
+    font-size: 11px;
+}
+
+.post-short img {
+    width: 100%;
+    height: auto;
+}
+
+.post-single img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.text-body {
+    font-size: 14px;
+    line-height: 14px;
+    text-align: justify;
+}
+
+.text-body p {
+    margin-bottom: 10px !important;
+}

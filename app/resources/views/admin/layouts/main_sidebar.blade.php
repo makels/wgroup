@@ -8,7 +8,7 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-            <a href="{{ route("user", ["user_id" => auth()->user()->id]) }}" class="d-block">
+            <a href="#" class="d-block">
                 <i class="far fa-user-circle nav-icon"></i>
                 {{ auth()->user()->name }}<br>
                 <small>({{ App\Models\User::getRoleName(auth()->user()->role) }})</small>
